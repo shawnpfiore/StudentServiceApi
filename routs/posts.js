@@ -18,7 +18,8 @@ router.get("/", async (req, res) => {
 // save a post
 router.post('/', async (req, res) => {
     const post = new Post({
-        title: req.body.title, description: req.body.description, ip: req.body.ip, name: req.body.name, LessonData: req.body.LessonData
+        title: req.body.title, description: req.body.description, ip: req.body.ip,
+        name: req.body.name, LessonData: req.body.LessonData
     });
 
     try {
@@ -49,7 +50,8 @@ router.patch("/:postId", async (req, res) => {
             {
                 $set:
                     {
-                        title: req.body.title, description: req.body.description, ip: req.body.ip, name: req.body.name, LessonData: req.body.LessonData
+                        title: req.body.title, description: req.body.description, ip: req.body.ip,
+                        name: req.body.name, LessonData: req.body.LessonData
                     }
             }
         )
