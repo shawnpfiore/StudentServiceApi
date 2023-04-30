@@ -1,5 +1,6 @@
 const {mongoose} = require("mongoose")
 
+// JSON Scheme for MongoDb
 const PostSchema = mongoose.Schema({
     title: {
         type: String, required: true,

@@ -3,7 +3,7 @@ const router = express.Router();
 
 const Post = require('../model/Post');
 
-// Get all the post
+// Get all the posts
 router.get("/", async (req, res) => {
 
     try {
