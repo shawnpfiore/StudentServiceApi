@@ -18,6 +18,7 @@ const postRoute = require("./routs/posts");
 app.use("/posts", postRoute);
 
 // connect the mongoDb
+// check or create the .env file for DB_CONNECTION string
 mongoose.connect(process.env.DB_CONNECTION);
 
 // Create a listening port

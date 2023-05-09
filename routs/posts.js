@@ -2,6 +2,7 @@ const express = require("express")
 const router = express.Router();
 
 const Post = require('../model/Post');
+const {Schema} = require("mongoose");
 
 // Get all the posts
 router.get("/", async (req, res) => {
@@ -17,10 +18,8 @@ router.get("/", async (req, res) => {
 
 // save a post
 router.post('/', async (req, res) => {
-    const post = new Post({
-        title: req.body.title, description: req.body.description, ip: req.body.ip,
-        name: req.body.name, LessonData: req.body.LessonData
-    });
+    const post = new Post();
+    post.inventoryDetails = req.body;
 
     try {
         const savedPost = await post.save();
@@ -45,15 +44,16 @@ router.get("/:postId", async (req, res) => {
 // Update a specific post
 router.patch("/:postId", async (req, res) => {
     try {
+
+        const entries = Object.keys(req.body);
+        const updateQuery = {};
+        for (let i =0; i < entries.length; i++)
+        {
+            updateQuery[[i]] = Object.values(req.body);
+        }
+
         const updatePost = await Post.updateOne(
-            {_id: req.params.postId},
-            {
-                $set:
-                    {
-                        title: req.body.title, description: req.body.description, ip: req.body.ip,
-                        name: req.body.name, LessonData: req.body.LessonData
-                    }
-            }
+            {_id: req.params.postId}, {$set: req.body}
         )
         res.json(updatePost);
     } catch (err) {
